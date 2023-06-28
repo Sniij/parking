@@ -29,7 +29,10 @@ public class MemberController {
 
         Member member = memberService.createMember(memberPostDto);
 
-        MemberResponseDto memberResponseDto = memberService.createMemberResponseDto(member);
+        MemberResponseDto memberResponseDto = MemberResponseDto.builder()
+                .memberId(member.getMemberId())
+                .displayName(member.getDisplayName())
+                .build();
 
         return new ResponseEntity<>(memberResponseDto, HttpStatus.CREATED);
     }
@@ -39,7 +42,10 @@ public class MemberController {
 
         Member member = memberService.findVerifiedMember(memberId);
 
-        MemberResponseDto memberResponseDto = memberService.createMemberResponseDto(member);
+        MemberResponseDto memberResponseDto = MemberResponseDto.builder()
+                .memberId(member.getMemberId())
+                .displayName(member.getDisplayName())
+                .build();
 
         return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
     }

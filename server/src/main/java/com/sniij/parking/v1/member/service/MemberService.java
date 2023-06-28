@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Transactional
 @Service
 public class MemberService {
 
@@ -42,13 +41,6 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    public MemberResponseDto createMemberResponseDto(Member member) {
-
-        return MemberResponseDto.builder()
-                                    .userId(member.getMemberId())
-                                    .displayName(member.getDisplayName())
-                                    .build();
-    }
 
     public void updateMember(Long memberId, MemberPatchDto memberPatchDto) {
 
@@ -65,7 +57,7 @@ public class MemberService {
 
     public void deleteMember(Long memberId) {
 
-        verifyExistsMember(memberId);
+        verifyExistsId(memberId);
         memberRepository.deleteById(memberId);
     }
 
@@ -78,7 +70,7 @@ public class MemberService {
 
     }
 
-    protected void verifyExistsMember(Long id){
+    protected void verifyExistsId(Long id){
 
         // repository 에 member id 가 존재하지 않으면 exception
         if(!memberRepository.existsById(id)){

@@ -1,19 +1,18 @@
 package com.sniij.parking.advice;
 
-
 import com.sniij.parking.exception.BusinessLogicException;
 import com.sniij.parking.response.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
-import java.util.List;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
 
@@ -37,8 +36,21 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ResponseEntity handleBusinessLogicException(BusinessLogicException e) {
+
         final ErrorResponse response = ErrorResponse.of(e.getExceptionCode());
 
-        return new ResponseEntity<>(response, HttpStatus.valueOf(e.getExceptionCode().getStatus()));
+        return new ResponseEntity<>(response,HttpStatus.valueOf(e.getExceptionCode().getStatus()));
+    }
+
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ErrorResponse handleException(Exception e) {
+
+        log.error("# handle Exception", e);
+
+        final ErrorResponse response = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return response;
     }
 }
