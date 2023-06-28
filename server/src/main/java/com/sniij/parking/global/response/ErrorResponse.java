@@ -1,7 +1,7 @@
-package com.sniij.parking.response;
+package com.sniij.parking.global.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sniij.parking.exception.ExceptionCode;
+import com.sniij.parking.global.exception.ExceptionCode;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;

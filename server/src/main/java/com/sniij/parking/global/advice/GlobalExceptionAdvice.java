@@ -1,7 +1,7 @@
-package com.sniij.parking.advice;
+package com.sniij.parking.global.advice;
 
-import com.sniij.parking.exception.BusinessLogicException;
-import com.sniij.parking.response.ErrorResponse;
+import com.sniij.parking.global.exception.BusinessLogicException;
+import com.sniij.parking.global.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

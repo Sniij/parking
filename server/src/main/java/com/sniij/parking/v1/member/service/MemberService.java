@@ -1,16 +1,14 @@
 package com.sniij.parking.v1.member.service;
 
 
-import com.sniij.parking.exception.BusinessLogicException;
-import com.sniij.parking.exception.ExceptionCode;
+import com.sniij.parking.global.exception.BusinessLogicException;
+import com.sniij.parking.global.exception.ExceptionCode;
 import com.sniij.parking.v1.member.dto.MemberPatchDto;
 import com.sniij.parking.v1.member.dto.MemberPostDto;
-import com.sniij.parking.v1.member.dto.MemberResponseDto;
 import com.sniij.parking.v1.member.entity.Member;
 import com.sniij.parking.v1.member.repository.MemberRepository;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -64,7 +62,7 @@ public class MemberService {
     protected void verifyExistsEmail(String email) {
 
         // repository 에 email 이 존재하면 exception
-        if(memberRepository.existsByEmail(email)){
+        if(memberRepository.existsByEmail(email)==1){
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
 

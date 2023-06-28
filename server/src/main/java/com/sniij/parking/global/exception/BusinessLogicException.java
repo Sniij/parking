@@ -1,4 +1,4 @@
-package com.sniij.parking.exception;
+package com.sniij.parking.global.exception;
 
 import lombok.Getter;
 
