@@ -1,12 +1,12 @@
-package com.sniij.parking.v1.member.service;
+package com.sniij.parking.api.v1.member.service;
 
 
+import com.sniij.parking.api.v1.member.dto.MemberPatchDto;
+import com.sniij.parking.api.v1.member.dto.MemberPostDto;
+import com.sniij.parking.api.v1.member.entity.Member;
+import com.sniij.parking.api.v1.member.repository.MemberRepository;
 import com.sniij.parking.global.exception.BusinessLogicException;
 import com.sniij.parking.global.exception.ExceptionCode;
-import com.sniij.parking.v1.member.dto.MemberPatchDto;
-import com.sniij.parking.v1.member.dto.MemberPostDto;
-import com.sniij.parking.v1.member.entity.Member;
-import com.sniij.parking.v1.member.repository.MemberRepository;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

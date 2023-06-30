@@ -1,4 +1,4 @@
-package com.sniij.parking.v1.member.entity;
+package com.sniij.parking.api.v1.member.entity;
 
 import lombok.*;
 
