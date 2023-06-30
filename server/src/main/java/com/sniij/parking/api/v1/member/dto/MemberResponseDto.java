@@ -1,4 +1,4 @@
-package com.sniij.parking.v1.member.dto;
+package com.sniij.parking.api.v1.member.dto;
 
 import lombok.Builder;
 import lombok.Getter;
