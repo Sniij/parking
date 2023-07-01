@@ -7,21 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-@AutoConfigureMockMvc
 class ParkingApplicationTests {
 
-	@Autowired
-	private MockMvc mockMvc;
-
-	// (4)
-	@Test
-	public void postMemberTest() {
-		// given (5) 테스트용 request body 생성
-
-		// when (6) MockMvc 객체로 테스트 대상 Controller 호출
-
-		// then (7) Controller 핸들러 메서드에서 응답으로 수신한 HTTP Status 및 response body 검증
-	}
 	@Test
 	void contextLoads() {
 	}

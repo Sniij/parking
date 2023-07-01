@@ -3,12 +3,9 @@ package com.sniij.parking.member;
 import com.google.gson.Gson;
 import com.sniij.parking.api.v1.member.dto.MemberPostDto;
 import com.sniij.parking.api.v1.member.entity.Member;
-import com.sniij.parking.api.v1.member.repository.MemberRepository;
 import com.sniij.parking.api.v1.member.service.MemberService;
-import com.sniij.parking.global.exception.BusinessLogicException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,15 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-
 import javax.transaction.Transactional;
 
 
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,7 +36,6 @@ class MemberControllerTest {
 
     @Autowired
     private Gson gson;
-
 
     @MockBean
     private MemberService memberService;
@@ -105,7 +98,7 @@ class MemberControllerTest {
         // ===================================postMember()를 이용한 테스트 데이터 생성 끝
 
         String location = postActions.andReturn().getResponse().getHeader("Location");
-
+        System.out.println(postActions.andReturn().getResponse());
         // when / then
         mockMvc.perform(
                         get(location).accept(MediaType.APPLICATION_JSON)

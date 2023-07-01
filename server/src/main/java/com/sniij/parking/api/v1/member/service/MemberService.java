@@ -62,9 +62,12 @@ public class MemberService {
     protected void verifyExistsEmail(String email) {
 
         // repository 에 email 이 존재하면 exception
-        if(memberRepository.existsByEmail(email)==1){
+        if(memberRepository.findByEmail(email).isPresent()) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
+        /*if(memberRepository.existsByEmail(email)==1){
+            throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
+        }*/
 
     }
 
