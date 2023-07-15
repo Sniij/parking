@@ -53,4 +53,13 @@ public class GlobalExceptionAdvice {
 
         return response;
     }
+
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleIllegalArgumentException(
+            IllegalArgumentException e) {
+
+        return ErrorResponse.of(HttpStatus.BAD_REQUEST);
+    }
 }

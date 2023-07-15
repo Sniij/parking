@@ -30,6 +30,7 @@ import static com.sniij.parking.global.utils.ApiDocumentUtils.getRequestPreProce
 import static com.sniij.parking.global.utils.ApiDocumentUtils.getResponsePreProcessor;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.startsWith;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
@@ -152,7 +153,5 @@ class MemberControllerTest {
                                 .andExpect(jsonPath("$.displayName").value(post.getDisplayName()));
 
     }
-
-
 
 }
