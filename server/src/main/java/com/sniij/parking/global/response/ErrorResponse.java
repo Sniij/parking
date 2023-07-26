@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 
 import javax.validation.ConstraintViolation;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -32,6 +33,11 @@ public class ErrorResponse {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<ConstraintViolationError> violationErrors;
 
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private CustomData customData;
+
+
     // 아래 of 메서드를 이용해서 ErrorResponse 객체를 생성할 것이기 때문에 생성자 임에도 불구하고 private
     private ErrorResponse(List<FieldError> fieldErrors, List<ConstraintViolationError> violationErrors) {
         this.fieldErrors = fieldErrors;
@@ -40,6 +46,10 @@ public class ErrorResponse {
     private ErrorResponse(Integer status, String message){
         this.status = status;
         this.message = message;
+    }
+
+    private ErrorResponse(CustomData data){
+        this.customData = data;
     }
 
     // BindingResult 에 대한 ErrorResponse 객체를 생성하기 위해 FieldError 에게 전달시켜 fieldError 를 받아옴.
@@ -64,6 +74,10 @@ public class ErrorResponse {
 
     public static ErrorResponse of(Integer status, String message){
         return new ErrorResponse(status, message);
+    }
+
+    public static ErrorResponse of(ErrorResponse info, Map<String, String> message) {
+        return new ErrorResponse(new ErrorResponse.CustomData(info, message));
     }
 
     // Field Error 가공 : DTO 클래스의 유효성 검증에서 발생하는 에러 정보 생성
@@ -116,6 +130,17 @@ public class ErrorResponse {
                                         constraintViolation.getMessage()
                                           ))
                     .collect(Collectors.toList());
+        }
+    }
+
+    @Getter
+    public static class CustomData {
+        private final ErrorResponse info;
+        private final Map<String, String> message;
+
+        public CustomData(ErrorResponse info, Map<String, String> message) {
+            this.info = info;
+            this.message = message;
         }
     }
 }

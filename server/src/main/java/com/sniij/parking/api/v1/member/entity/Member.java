@@ -16,22 +16,25 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long memberId;
+    private Long memberId;
 
     @Column(nullable = false)
-    String email;
+    private String email;
 
     @Column(nullable = false, unique = true)
-    String displayName;
+    private String displayName;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     @Column
     private LocalDateTime createdAt = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDateTime();
 
+
+
     @Builder
-    public Member(String email, String displayName, String password) {
+    public Member(Long memberId, String email, String displayName, String password) {
+        this.memberId = memberId;
         this.email = email;
         this.displayName = displayName;
         this.password = password;

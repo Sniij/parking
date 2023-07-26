@@ -29,9 +29,14 @@ public class MemberServiceTest {
 
     //@Test
     public void createMemberTest() {
-        // given
-        Member member = new Member("abc@abc.com", "조만기", "1234");
 
+        // given
+        Member member = Member.builder()
+                .memberId(1L)
+                .email("abc@abc.com")
+                .displayName("조만기")
+                .password("1234")
+                .build();
 
         MemberPostDto post = new MemberPostDto();
         post.setEmail("abc@abc.com");

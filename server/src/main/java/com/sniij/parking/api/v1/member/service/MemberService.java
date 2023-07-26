@@ -40,7 +40,7 @@ public class MemberService {
     }
 
 
-    public void updateMember(Long memberId, MemberPatchDto memberPatchDto) {
+    public Member updateMember(Long memberId, MemberPatchDto memberPatchDto) {
 
         Member foundMember = findVerifiedMember(memberId);
 
@@ -50,7 +50,7 @@ public class MemberService {
                 .ifPresent(password -> foundMember.setPassword(password));
 
 
-        memberRepository.save(foundMember);
+        return memberRepository.save(foundMember);
     }
 
     public void deleteMember(Long memberId) {

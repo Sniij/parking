@@ -39,26 +39,52 @@ dependencies {
 	implementation 'org.springframework.restdocs:spring-restdocs-core:2.0.7.RELEASE'
 	asciidoctorExtensions  'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
+	// TEST 라이브러리
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
 
-	// Spring boot starters : jpa, security, web and validation for valid checks
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	// AWS paramStore 사용 Spring boot 버전 호환 상세 : https://spring.io/projects/spring-cloud
+	// S3 Client 활성화
+	implementation "org.springframework.cloud:spring-cloud-starter-aws-parameter-store-config:2.2.6.RELEASE"
+	implementation "io.awspring.cloud:spring-cloud-starter-aws-parameter-store-config:2.3.0"
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
+
+
+	// Entity 와 DTO 간 데이터 구조 변환을 위한 dependency
+	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
+	// Spring Web 기본 dependency
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
+	// security
 	//implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	// 유효성 검증을 위한 dependency
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// Spring Data JPA 사용을 위함
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// MySQL8 DB
 	runtimeOnly 'mysql:mysql-connector-java:8.0.28'
 
-	// gson
+	// GSON 라이브러리 : Java 객체 <=> JSON
 	implementation 'com.google.code.gson:gson:2.10.1'
 
-	// swagger
-	 implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
+	// 애너테이션 프로세싱 기능 활성화
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+	// webflux, Web client 사용하기 위함
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
+
 }
 
 

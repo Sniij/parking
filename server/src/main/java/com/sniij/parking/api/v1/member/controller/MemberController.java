@@ -6,6 +6,7 @@ import com.sniij.parking.api.v1.member.dto.MemberResponseDto;
 import com.sniij.parking.api.v1.member.entity.Member;
 import com.sniij.parking.api.v1.member.dto.MemberPostDto;
 import com.sniij.parking.api.v1.member.service.MemberService;
+import com.sniij.parking.global.response.SingleResponse;
 import com.sniij.parking.global.utils.UriCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ private final static String MEMBER_DEFAULT_URL = "/v1/member";
     }
 
     @GetMapping("/{memberId}")
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable @Positive Long memberId) {
+    public ResponseEntity getMember(@PathVariable @Positive Long memberId) {
 
         Member member = memberService.findVerifiedMember(memberId);
 
@@ -48,17 +49,22 @@ private final static String MEMBER_DEFAULT_URL = "/v1/member";
                 .displayName(member.getDisplayName())
                 .build();
 
-        return new ResponseEntity<>(memberResponseDto, HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponse<>(memberResponseDto), HttpStatus.OK);
     }
 
 
     @PatchMapping("/{memberId}")
-    public ResponseEntity<HttpStatus> patchMember(@PathVariable @Positive Long memberId,
+    public ResponseEntity patchMember(@PathVariable @Positive Long memberId,
                                                          @RequestBody MemberPatchDto memberPatchDto){
 
-        memberService.updateMember(memberId, memberPatchDto);
+        Member updatedMember = memberService.updateMember(memberId, memberPatchDto);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        MemberResponseDto memberResponseDto = MemberResponseDto.builder()
+                .memberId(updatedMember.getMemberId())
+                .displayName(updatedMember.getDisplayName())
+                .build();
+
+        return new ResponseEntity<>(new SingleResponse<>(memberResponseDto),HttpStatus.OK);
     }
 
     @DeleteMapping("/{memberId}")
@@ -67,7 +73,7 @@ private final static String MEMBER_DEFAULT_URL = "/v1/member";
 
         memberService.deleteMember(memberId);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
